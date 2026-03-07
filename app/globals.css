@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 42 54% 97%;
+  --foreground: 196 51% 14%;
+  --muted: 42 30% 92%;
+  --muted-foreground: 194 18% 39%;
+  --card: 0 0% 100%;
+  --card-foreground: 196 51% 14%;
+  --border: 32 24% 83%;
+  --input: 32 24% 83%;
+  --primary: 192 56% 25%;
+  --primary-foreground: 42 54% 97%;
+  --secondary: 41 62% 62%;
+  --secondary-foreground: 196 51% 14%;
+  --accent: 153 28% 91%;
+  --accent-foreground: 196 51% 14%;
+  --destructive: 0 72% 52%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 192 56% 25%;
+  --radius: 1.5rem;
+}
+
+* {
+  @apply border-border;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-background text-foreground antialiased;
+  background-image:
+    radial-gradient(circle at top, rgba(214, 173, 84, 0.16), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(247, 243, 232, 0.98));
+  min-height: 100vh;
+}
+
+a {
+  @apply transition-colors;
+}
+
+.container {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.section-space {
+  @apply py-16 sm:py-20 lg:py-24;
+}
+
+.prose-tax {
+  @apply max-w-none text-muted-foreground;
+}
+
+.prose-tax h1,
+.prose-tax h2,
+.prose-tax h3 {
+  @apply font-display text-foreground;
+}
+
+.prose-tax h1 {
+  @apply mb-6 text-4xl;
+}
+
+.prose-tax h2 {
+  @apply mb-4 mt-10 text-2xl;
+}
+
+.prose-tax h3 {
+  @apply mb-3 mt-8 text-xl;
+}
+
+.prose-tax p,
+.prose-tax li {
+  @apply leading-7;
+}
+
+.prose-tax ul,
+.prose-tax ol {
+  @apply my-6 space-y-2 pl-6;
+}
