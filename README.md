@@ -5,7 +5,10 @@ Production-grade lead-generation website for an accounting company in Kazakhstan
 ## Features
 
 - SEO landing pages for Kazakhstan accounting queries
+- Bilingual public site: Russian by default, Kazakh under `/kk`
 - Accounting services, pricing, contacts, FAQ and privacy pages
+- Dynamic SEO service pages under `/services/[slug]`
+- Admin-editable SEO service page CMS
 - Accounting price calculator
 - Salary, IP tax, VAT and payroll tax calculators
 - Lead capture forms after calculations
@@ -57,7 +60,7 @@ npm run dev
 ## Supabase setup
 
 1. Create a new Supabase project.
-2. Open SQL Editor and run [`supabase/schema.sql`](/home/jorzhik/buxtax2026/supabase/schema.sql).
+2. Open SQL Editor and run [`supabase/schema.sql`](supabase/schema.sql).
 3. In Authentication, create an admin user with email/password for `/admin/login`.
 4. Confirm the storage bucket `blog-images` exists and is public.
 5. Add the project URL and keys to `.env.local`.
@@ -77,7 +80,7 @@ The calculators are coded around Kazakhstan 2026 assumptions and are intentional
 - The standard VAT rate is treated as `16%` from January 1, 2026.
 - The patent regime for IP was abolished from January 1, 2026, so the calculator marks it as legacy/unavailable instead of presenting it as a current option.
 
-For production use, review the constants in [`lib/tax.ts`](/home/jorzhik/buxtax2026/lib/tax.ts) with your accountant or tax counsel whenever Kazakhstan tax rules change.
+For production use, review the constants in [`lib/tax.ts`](lib/tax.ts) with your accountant or tax counsel whenever Kazakhstan tax rules change.
 
 ## Deployment
 
@@ -90,10 +93,18 @@ Recommended Vercel settings:
 - Build command: `npm run build`
 - Output: default
 
+## Languages
+
+- Default public language: Russian on `/`
+- Kazakh version: mirrored public routes under `/kk`
+- Admin panel stays on the main route tree and is not duplicated under `/kk`
+
 ## Important paths
 
-- App routes: [`app`](/home/jorzhik/buxtax2026/app)
-- Shared components: [`components`](/home/jorzhik/buxtax2026/components)
-- Server actions: [`actions`](/home/jorzhik/buxtax2026/actions)
-- Supabase helpers: [`lib/supabase`](/home/jorzhik/buxtax2026/lib/supabase)
-- Tax logic: [`lib/tax.ts`](/home/jorzhik/buxtax2026/lib/tax.ts)
+- App routes: [`app`](app)
+- Shared components: [`components`](components)
+- Server actions: [`actions`](actions)
+- Supabase helpers: [`lib/supabase`](lib/supabase)
+- Tax logic: [`lib/tax.ts`](lib/tax.ts)
+- SEO service page loader: [`lib/service-pages.ts`](lib/service-pages.ts)
+- SEO service page route: [`app/services/[slug]/page.tsx`](app/services/[slug]/page.tsx)
