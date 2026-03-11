@@ -23,16 +23,20 @@ const leadFormSchema = z.object({
 
 type LeadFormValues = z.infer<typeof leadFormSchema>;
 
+import type { Locale } from "@/lib/i18n";
+
 export function LeadCaptureForm({
   source,
   title = "Get full tax consultation",
   description = "Leave your details and an accountant will contact you with a tailored recommendation.",
-  submitLabel = "Request accountant consultation"
+  submitLabel = "Request accountant consultation",
+  locale
 }: {
   source: LeadSource;
   title?: string;
   description?: string;
   submitLabel?: string;
+  locale?: Locale;
 }) {
   const [isPending, startTransition] = useTransition();
   const [status, setStatus] = useState<{ ok: boolean; message: string } | null>(null);

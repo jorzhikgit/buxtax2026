@@ -5,7 +5,7 @@ export const siteConfig = {
   url: "https://buxtax-kz.vercel.app",
   description:
     "Accounting outsourcing, tax reporting, payroll processing and Kazakhstan tax calculators for LLPs, IPs, startups and freelancers.",
-  phone: "+7 (700) 000-00-00",
+  phone: "+7 (727) 349-51-64",
   email: "hello@buxtax.kz",
   city: "Almaty",
   region: "Kazakhstan",
@@ -179,7 +179,8 @@ export const pricingHighlights = [
 export const leadSourceLabels: Record<LeadSource, string> = {
   landing: "Landing",
   calculator: "Calculator",
-  blog: "Blog"
+  blog: "Blog",
+  service: "Service"
 };
 
 export const samplePosts: BlogPost[] = [

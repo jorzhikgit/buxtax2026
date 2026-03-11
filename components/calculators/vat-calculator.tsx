@@ -9,13 +9,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { calculatorComplianceNote, calculateVat } from "@/lib/tax";
+import type { Locale } from "@/lib/i18n";
 
 interface VatFormValues {
   amount: number;
   type: "add" | "remove";
 }
 
-export function VatCalculator() {
+export function VatCalculator({ locale }: { locale?: Locale }) {
   const { register, watch } = useForm<VatFormValues>({
     defaultValues: {
       amount: 1_000_000,
@@ -66,6 +67,7 @@ export function VatCalculator() {
         <LeadCaptureForm
           source="calculator"
           description="Need help with VAT registration, reporting or ESF workflow? Leave your details for a VAT consultation."
+          locale={locale}
         />
       </div>
     </div>

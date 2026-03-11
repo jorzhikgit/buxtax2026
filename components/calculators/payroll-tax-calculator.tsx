@@ -8,12 +8,13 @@ import { ResultRow } from "@/components/calculators/result-row";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { calculatorComplianceNote, calculatePayrollTax } from "@/lib/tax";
+import type { Locale } from "@/lib/i18n";
 
 interface PayrollTaxFormValues {
   salary: number;
 }
 
-export function PayrollTaxCalculator() {
+export function PayrollTaxCalculator({ locale }: { locale?: Locale }) {
   const { register, watch } = useForm<PayrollTaxFormValues>({
     defaultValues: {
       salary: 400_000
@@ -63,6 +64,7 @@ export function PayrollTaxCalculator() {
         <LeadCaptureForm
           source="calculator"
           description="If you need monthly payroll processing, leave your details and we will prepare a payroll support offer."
+          locale={locale}
         />
       </div>
     </div>

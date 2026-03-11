@@ -1,4 +1,4 @@
-export type LeadSource = "landing" | "calculator" | "blog";
+export type LeadSource = "landing" | "calculator" | "blog" | "service";
 
 export interface Lead {
   id: string;
@@ -46,4 +46,16 @@ export interface AdminDashboardStats {
   calculatorLeads: number;
   leadsThisWeek: number;
   totalBlogArticles: number;
+}
+
+export interface ServicePage {
+  id: string;
+  slug: string;
+  title: string;
+  content: string;
+  metaTitle: string;
+  metaDescription: string;
+  published: boolean;
+  createdAt: string;
+  updatedAt: string;
 }

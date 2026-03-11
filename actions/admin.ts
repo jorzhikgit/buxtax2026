@@ -199,3 +199,76 @@ export async function uploadBlogImageAction(formData: FormData) {
 
   return { success: true, message: "Image uploaded.", url: data.publicUrl };
 }
+
+const servicePageSchema = z.object({
+  id: z.string().optional(),
+  slug: z.string().min(1),
+  title: z.string().min(1),
+  content: z.string(),
+  metaTitle: z.string(),
+  metaDescription: z.string(),
+  published: z.boolean()
+});
+
+export async function saveServicePageAction(input: unknown) {
+  const parsed = servicePageSchema.safeParse(input);
+  if (!parsed.success) {
+    return { success: false, message: "Please complete all fields." };
+  }
+
+  if (!hasSupabaseServiceEnv()) {
+    return {
+      success: false,
+      message: "Supabase service role env vars are required."
+    };
+  }
+
+  const supabase = createAdminSupabaseClient();
+  const payload = parsed.data;
+  const now = new Date().toISOString();
+
+  const data = {
+    slug: slugify(payload.slug),
+    title: payload.title,
+    content: payload.content,
+    meta_title: payload.metaTitle,
+    meta_description: payload.metaDescription,
+    published: payload.published,
+    updated_at: now
+  };
+
+  const response = payload.id
+    ? await supabase.from("service_pages").update(data).eq("id", payload.id)
+    : await supabase.from("service_pages").insert({ ...data, created_at: now });
+
+  if (response.error) {
+    return { success: false, message: response.error.message };
+  }
+
+  revalidatePath("/admin/service-pages");
+  revalidatePath(`/services/${slugify(payload.slug)}`);
+
+  return { success: true, message: "Service page saved." };
+}
+
+export async function toggleServicePagePublishAction(id: string, published: boolean) {
+  if (!hasSupabaseServiceEnv()) {
+    return { success: false, message: "Supabase service role is not configured." };
+  }
+
+  const supabase = createAdminSupabaseClient();
+  const { error } = await supabase
+    .from("service_pages")
+    .update({
+      published,
+      updated_at: new Date().toISOString()
+    })
+    .eq("id", id);
+
+  if (error) {
+    return { success: false, message: error.message };
+  }
+
+  revalidatePath("/admin/service-pages");
+  return { success: true, message: "Publish status updated." };
+}

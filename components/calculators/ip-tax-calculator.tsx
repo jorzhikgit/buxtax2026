@@ -10,13 +10,14 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { calculatorComplianceNote, calculateIpTax } from "@/lib/tax";
 import { formatCurrency } from "@/lib/utils";
+import type { Locale } from "@/lib/i18n";
 
 interface IpTaxFormValues {
   monthlyIncome: number;
   regime: "simplified" | "patent" | "general";
 }
 
-export function IpTaxCalculator() {
+export function IpTaxCalculator({ locale }: { locale?: Locale }) {
   const { register, watch } = useForm<IpTaxFormValues>({
     defaultValues: {
       monthlyIncome: 1_500_000,
@@ -78,6 +79,7 @@ export function IpTaxCalculator() {
         <LeadCaptureForm
           source="calculator"
           description="Share your income level and we will verify the most suitable tax regime and reporting obligations for your IP."
+          locale={locale}
         />
       </div>
     </div>

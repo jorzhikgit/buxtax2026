@@ -14,6 +14,7 @@ import {
   type SalaryEmployeeType,
   type SalaryTaxRegime
 } from "@/lib/tax";
+import type { Locale } from "@/lib/i18n";
 
 interface SalaryFormValues {
   grossSalary: number;
@@ -21,7 +22,7 @@ interface SalaryFormValues {
   taxRegime: SalaryTaxRegime;
 }
 
-export function SalaryCalculator() {
+export function SalaryCalculator({ locale }: { locale?: Locale }) {
   const { register, watch } = useForm<SalaryFormValues>({
     defaultValues: {
       grossSalary: 400_000,
@@ -98,7 +99,7 @@ export function SalaryCalculator() {
             <ResultRow label="Total employer cost" value={result.totalEmployerCost} emphasize />
           </CardContent>
         </Card>
-        <LeadCaptureForm source="calculator" />
+        <LeadCaptureForm source="calculator" locale={locale} />
       </div>
     </div>
   );

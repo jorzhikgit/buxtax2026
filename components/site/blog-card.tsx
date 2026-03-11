@@ -4,8 +4,17 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import type { BlogPost } from "@/types";
 import { formatDate } from "@/lib/utils";
+import { localizePath, type Locale } from "@/lib/i18n";
 
-export function BlogCard({ post }: { post: BlogPost }) {
+export function BlogCard({ 
+  post,
+  locale
+}: { 
+  post: BlogPost;
+  locale?: Locale;
+}) {
+  const href = locale ? localizePath(`/blog/${post.slug}`, locale) : `/blog/${post.slug}`;
+
   return (
     <Card className="h-full">
       <CardHeader className="space-y-4">
@@ -15,7 +24,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
           ))}
         </div>
         <CardTitle className="font-display text-2xl leading-tight">
-          <Link href={`/blog/${post.slug}`} className="hover:text-primary">
+          <Link href={href} className="hover:text-primary">
             {post.title}
           </Link>
         </CardTitle>
@@ -23,8 +32,8 @@ export function BlogCard({ post }: { post: BlogPost }) {
       </CardHeader>
       <CardContent className="space-y-5">
         <p className="text-sm leading-7 text-muted-foreground">{post.excerpt}</p>
-        <Link href={`/blog/${post.slug}`} className="text-sm font-semibold text-primary">
-          Read article
+        <Link href={href} className="text-sm font-semibold text-primary">
+          Читать статью
         </Link>
       </CardContent>
     </Card>

@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { calculatorComplianceNote, calculateAccountingPrice } from "@/lib/tax";
 import { formatCurrency } from "@/lib/utils";
+import type { Locale } from "@/lib/i18n";
 
 interface FormValues {
   companyType: "ip" | "llp";
@@ -17,7 +18,7 @@ interface FormValues {
   monthlyDocuments: number;
 }
 
-export function AccountingPriceCalculator() {
+export function AccountingPriceCalculator({ locale }: { locale?: Locale }) {
   const { register, watch } = useForm<FormValues>({
     defaultValues: {
       companyType: "ip",
@@ -92,6 +93,7 @@ export function AccountingPriceCalculator() {
         source="calculator"
         title="Request a tailored accounting quote"
         description="Send your details and we will validate the estimate, scope the workload and prepare a practical monthly offer."
+        locale={locale}
       />
     </div>
   );
